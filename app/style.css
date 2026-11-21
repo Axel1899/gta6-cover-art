@@ -1,0 +1,284 @@
+/* style.css — Cover Art Studio: dark editor chrome around the canvas. */
+
+@font-face {
+  font-family: 'CoverDisplay';
+  src: url('fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0c0c12;
+  --panel: #15151f;
+  --panel-2: #1d1d2b;
+  --line: #2b2b3d;
+  --text: #f2f0ea;
+  --muted: #9a97a8;
+  --accent: #ff2e88;
+  --accent-2: #ffb300;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(255, 46, 136, 0.14), transparent 60%),
+    radial-gradient(900px 480px at -10% 110%, rgba(0, 180, 255, 0.1), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 22px 18px 34px;
+}
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.masthead h1 {
+  font-family: 'CoverDisplay', 'Arial Black', sans-serif;
+  font-size: clamp(26px, 4vw, 40px);
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.masthead h1 .hot {
+  color: var(--accent);
+}
+
+.masthead p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stage-wrap {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+#stage {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  background: #07070c;
+  cursor: grab;
+  touch-action: none;
+}
+
+#stage.dragging {
+  cursor: grabbing;
+}
+
+.stage-hint {
+  margin: 10px 2px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.stage-hint strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.controls {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.controls section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.controls h2 {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.05s ease;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--accent), #ff7a18);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 13px 12px;
+  font-size: 15px;
+}
+
+.btn.primary:hover {
+  filter: brightness(1.08);
+}
+
+.sample-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.sample-btn {
+  padding: 8px 4px;
+  font-size: 12.5px;
+  text-transform: capitalize;
+}
+
+label.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+input[type='text'],
+select {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 14.5px;
+  width: 100%;
+}
+
+input[type='text']:focus,
+select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+  border-color: transparent;
+}
+
+input[type='range'] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.selected-note {
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 9px 11px;
+}
+
+.selected-note strong {
+  color: var(--accent-2);
+}
+
+.foot {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 12.5px;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------ */
+/* Screenshot mode: ?shot=cover hides every bit of editor chrome and   */
+/* leaves a single square cover filling the viewport.                  */
+/* ------------------------------------------------------------------ */
+
+body.shot-cover {
+  background: #000;
+}
+
+body.shot-cover .app {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.shot-cover .masthead,
+body.shot-cover .controls,
+body.shot-cover .stage-hint,
+body.shot-cover .foot {
+  display: none;
+}
+
+body.shot-cover .workspace {
+  display: block;
+}
+
+body.shot-cover .stage-wrap {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+body.shot-cover #stage {
+  width: 100vmin;
+  height: 100vmin;
+  border-radius: 0;
+  cursor: default;
+}

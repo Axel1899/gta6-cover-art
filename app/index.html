@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Art Studio — GTA-Style Cover Maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="masthead">
+    <h1>Cover Art <span class="hot">Studio</span></h1>
+    <p>Turn a photo and a caption into bold multi-panel cover art. Everything happens in your browser — photos never leave your device.</p>
+  </header>
+
+  <div class="workspace">
+    <div class="stage-wrap">
+      <canvas id="stage" width="760" height="760"></canvas>
+      <p class="stage-hint"><strong>Tip:</strong> click a panel to select it, drag on the cover to move its photo, scroll to zoom it — or nudge with the arrow keys and + / −.</p>
+    </div>
+
+    <aside class="controls">
+      <section>
+        <h2>1 · Photo</h2>
+        <label class="btn" for="allPhoto">Use one photo for every panel</label>
+        <input type="file" id="allPhoto" accept="image/*" hidden>
+        <div class="selected-note" id="selInfo">No panel selected.</div>
+        <label class="btn" for="panelPhoto">Replace the selected panel's photo</label>
+        <input type="file" id="panelPhoto" accept="image/*" hidden>
+      </section>
+
+      <section>
+        <h2>Or start from a sample</h2>
+        <div class="sample-grid" id="samples"></div>
+      </section>
+
+      <section>
+        <h2>2 · Frame it</h2>
+        <label class="field">Layout
+          <select id="layoutSel"></select>
+        </label>
+        <label class="field">Colour grade
+          <select id="gradeSel">
+            <option value="sunset">Sunset — warm vice glow</option>
+            <option value="neon">Neon — night-city pop</option>
+            <option value="noir">Noir — gritty monochrome</option>
+          </select>
+        </label>
+        <label class="field">Zoom of selected panel
+          <input type="range" id="zoomRange" min="1" max="3.5" step="0.01" value="1">
+        </label>
+      </section>
+
+      <section>
+        <h2>3 · Caption</h2>
+        <label class="field">Main caption
+          <input type="text" id="captionInput" maxlength="26" placeholder="e.g. SUNSET HEIST">
+        </label>
+        <label class="field">Sub-caption (optional)
+          <input type="text" id="subInput" maxlength="40" placeholder="e.g. WELCOME TO PALM CITY">
+        </label>
+      </section>
+
+      <section>
+        <h2>4 · Export</h2>
+        <label class="field">Export size
+          <select id="sizeSel">
+            <option value="1080x1080">Square — 1080 × 1080</option>
+            <option value="1080x1350">Portrait — 1080 × 1350</option>
+            <option value="1920x1080">Wide — 1920 × 1080</option>
+          </select>
+        </label>
+        <button class="btn primary" id="exportBtn" type="button">Export PNG</button>
+      </section>
+    </aside>
+  </div>
+
+  <p class="foot">Made for fun. Not affiliated with Rockstar Games or the Grand Theft Auto series.</p>
+</div>
+
+<script type="module" src="src/main.js"></script>
+<script type="module" src="src/shots.js"></script>
+</body>
+</html>
